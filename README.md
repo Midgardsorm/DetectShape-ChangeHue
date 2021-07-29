@@ -23,18 +23,8 @@ Kilka uwag do projektu:
  5. Zmniejszenie liczby zmiennych w klasie HueController. Planowane podejście: Zrobiłbym powiązane struktury które trzeba zarejestrować jako nowy typ by były widoczne i możliwe do użycia w qml.
  6. Usprawnienie wykrywania elipsy. Planowane podejście: Dobrym tropem wydaje się zastosowanie transformacji Hougha, która poza wykryciem linii pozwala na wykrywanie kół i elips - sprawdziłbym jak wygląda implementacja tego algorytmu w scikit-image. 
 
-
-
-Zadanie wysłane przez formę OrbitVU:
-
-# Witaj! 
-Pierwszy krok już za Tobą! Poniżej znajduje się instrukcja opisująca funkcjonalność aplikacji, o której stworzenie chcielibyśmy Cię poprosić.
-
 ## Założenia aplikacji
-1.  Aplikacja powinna umożliwiać wczytanie obrazu testowego z zadanej ścieżki w formacie  **png** (w repozytorium znajduje się przykładowy obraz testowy),
+1.  Aplikacja powinna umożliwiać wczytanie obrazu testowego z zadanej ścieżki w formacie  **png**,
 1.  Po wczytaniu obrazu aplikacja powinna obliczyć ilość figur znajdujących się na obrazku z podziałem na kształty (elipsy, trójkąty i prostokąty),
 1.  Użytkownik powinien mieć możliwość wybrania dowolnej figury wykrytej w obrazie (wybrana figura powinna zostać zaznaczona konturem w dowolnym kolorze, którego zdefiniowanie powinno być możliwe w UI),
 1.  Po wybraniu figury należy umożliwić użytkownikowi zmianę jego koloru (przesunięcie  **hue**).
-
-## Podsumowanie
-Przejrzystość i jakość wykonania zadania będzie miała decydujący wpływ. Oczywiście mile widziane, jeżeli aplikacja będzie zawierać intuicyjny interfejs graficzny stworzony np. za pomocą **QtWidgets**. Preferowana przez nas biblioteka do przetwarzania obrazów to **OpenCV**.
