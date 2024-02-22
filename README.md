@@ -1,30 +1,32 @@
-W katalogu "demo" znajduje się krótkie nagranie z działania aplikacji.
+Small program to detect and change hues (OpenCV, Qt/Qml)
 
-Kilka uwag do projektu:
- - projekt skompilowałem za pomocą MSVC2019 i uruchamiałem na systemie Widnows 10.
- - Wykorzystuje Qt6 (powinno działać od wersji  Qt 5.15, ale nie miałem już czasu tego sprawdzić)
- - wykorzystałem OpenCV w wersji 4.5.2 (którą skompilowałem również za pomocą MSVC2019)
- - okno obrazu jest natywne dla OpenCV, okno GUI stworzyłem w QML, z pomocą Qt.Quick, QtQuick.Controls, QtQuick.Layouts i Qt.labs.platform
- - pierwszy raz miałem styczność z OpenCV, więc podczas pracy korzystałem mocno z informacji zamieszczonych na StackOverflow i z kodu zamieszczonego tutaj: [GItHub: bsdnoobz](https://github.com/bsdnoobz/opencv-code/blob/master/shape-detect.cpp)
+In the "demo" folder there is a short recording of the application's operation.
 
- Działanie programu
- 1. Po uruchomieniu aplikacji naciskamy przycisk "Open file" i wybieramy plik *png
- 2. Pojawi się obraz, następnie naciskamy przycisk "Detect shapes"
- 3. Zostają wykryte figury i załadowane na listę w GUI. Ponad listą jest informacja o ilości wykrytych trójkątów, prostokątów, kół i elips.
- 4. Od tego momentu można swobodnie zaznaczać kształt na liście lub bezpośrednio na obrazie.
- 5. Suwakiem na dole zmieniamy wartość HUE dla zaznaczonego elementu.
- 6. Kolor zaznaczenia zmieniamy klikając na kolorowy prostokąt poniżej napisu "Selection color (click below)". Pojawi się okno z wyborem koloru.
+Some notes on the project:
+ - I compiled the project using MSVC2019 and ran it on a Widnows 10 system.
+ - It uses Qt6 (it should work from Qt version 5.15, but I didn't have time to check it anymore)
+ - I used OpenCV version 4.5.2 (which I also compiled using MSVC2019)
+ - The image window is native to OpenCV, I created the GUI window in QML, with the help of Qt.Quick, QtQuick.Controls, QtQuick.Layouts and Qt.labs.platform
+ - This was the first time I was exposed to OpenCV, so while working I used heavily the information posted on StackOverflow and the code posted here: [GItHub: bsdnoobz](https://github.com/bsdnoobz/opencv-code/blob/master/shape-detect.cpp)
 
- Funkcjonalności których nie zrobiłem ze względu na czas. Zamieszczam również planowane podejście do zrobienia tych funkcjonalności:
- 1. Przeniesienie wyświetlania z okna OpenCV do GUI w qml. Planowane podejście: zastosowałbmym QImageProvider i przechwytywał koordynaty po naciśnięciu myszy które przekazałbym do funkcjonalności zajmującej się zaznaczeniem elementów na planszy
- 2. Odczytywanie innych formatów graficznych. Planowane podejście: dopisałbym inne dozwolone typy w fileDialog w qml i sprawdzał czy ładują się i czy są obsługiwane prawidłowo.
- 3. Zapis aktywnego pliku. Planowane podejście: file dialog w qml posiada gotową funkcjonalność - wystarczyłoby w cpp napisać funkcję dostarczającą ścieżkę do zapisania pliku.
- 4. Zaznaczanie grupowe kształtów. Planowane podejście: aktywny wybrany kontur zamieniłbym na wektor wybranych konturów (reszta cpp jest przygotowana już do obsługi wielu zaznaczonych konturów). W qml dopisałbym własną obsługę zaznaczania aktywnych indeksów.
- 5. Zmniejszenie liczby zmiennych w klasie HueController. Planowane podejście: Zrobiłbym powiązane struktury które trzeba zarejestrować jako nowy typ by były widoczne i możliwe do użycia w qml.
- 6. Usprawnienie wykrywania elipsy. Planowane podejście: Dobrym tropem wydaje się zastosowanie transformacji Hougha, która poza wykryciem linii pozwala na wykrywanie kół i elips - sprawdziłbym jak wygląda implementacja tego algorytmu w scikit-image. 
+ Program operation
+ 1. After launching the application, press the "Open file" button and select the *png file
+ 2. An image will appear, then we press the "Detect shapes" button
+ 3. The figures are detected and loaded into a list in the GUI. Above the list is information about the number of detected triangles, rectangles, circles and ellipses.
+ 4. From this point, you can freely select the shape in the list or directly on the image.
+ 5. With the slider at the bottom, we change the HUE value for the selected element.
+ 6. We change the color of the selection by clicking on the colored rectangle below the words "Selection color (click below)". A color selection window will appear.
 
-## Założenia aplikacji
-1.  Aplikacja powinna umożliwiać wczytanie obrazu testowego z zadanej ścieżki w formacie  **png**,
-1.  Po wczytaniu obrazu aplikacja powinna obliczyć ilość figur znajdujących się na obrazku z podziałem na kształty (elipsy, trójkąty i prostokąty),
-1.  Użytkownik powinien mieć możliwość wybrania dowolnej figury wykrytej w obrazie (wybrana figura powinna zostać zaznaczona konturem w dowolnym kolorze, którego zdefiniowanie powinno być możliwe w UI),
-1.  Po wybraniu figury należy umożliwić użytkownikowi zmianę jego koloru (przesunięcie  **hue**).
+ Functionalities that I did not do due to time. I am also posting the planned approach to doing these functionalities:
+ 1. Moving the display from the OpenCV window to the GUI in qml. The planned approach: I would use QImageProvider and capture coordinates when the mouse is pressed which I would pass to the functionality that deals with selecting elements on the board
+ 2  Read other graphic formats. Planned approach: I would add other allowed types in the fileDialog in qml and check that they load and are handled correctly.
+ 3  Saving the active file. Planned approach: file dialog in qml has ready functionality - it would be enough to write a function in cpp that provides the path to save the file.
+ 4. Group selection of shapes. Planned approach: I would replace the active selected contour with a vector of selected contours (the rest of the cpp is already prepared to handle multiple selected contours). I would add my own support for selecting active indexes in qml.
+ 5  Reduce the number of variables in the HueController class. Planned approach: I would make related structures that need to be registered as a new type to be visible and usable in qml.
+ 6. Improve ellipsis detection. Planned approach: a good lead seems to be the use of the Hough transform, which in addition to line detection allows the detection of circles and ellipses - I would check how the implementation of this algorithm looks like in scikit-image.
+    
+## Application assumptions
+- The application should be able to load a test image from the specified path in **png** format,
+- After loading the image, the application should calculate the number of figures found in the image by shape (ellipses, triangles and rectangles),
+- The user should be able to select any figure detected in the image (the selected figure should be marked with an outline in any color, which should be possible to define in the UI),
+- After selecting the figure, the user should be allowed to change its color (shift **hue**).
